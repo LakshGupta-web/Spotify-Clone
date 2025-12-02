@@ -65,34 +65,34 @@ function App() {
         setLoading(false)
       //If nothing is found on in the hash params -> check with the server if there is a valid refresh token in the cookie
       }else{
-        Axios(`${process.env.REACT_APP_BACK_URI}/refresh_token`, {withCredentials: true})
-          .then((response) => {
-            const access_token = 'BQAYnCHmJEGUV0Hk246K2HOB7rbw9O2WiqeSOVMEXN1zQuq3VEfjP2eRlUdPatc6pjGxqGyfa3yWWV61epsK_mew_9PO4sSrOax716r6i940BNayyillG9RZAQAIsHevDyGPpSlcX-BbJzTRNf3bTFUUTIpS33CVMZgnBgPbcYEtSYfXwvL0sm62YiYUpg1fXe8BpYOUATpdTWqkD5Hg1WDy45ezF4pmLpOGbfWBowElZ0s3sHFomLXh7tiGAHG0evXJ8vHULkAzzJYhSHa_urZ1NEfXJBIyxjrQmlTUFCm9pYv4FknJrD-hmztBjJvKsheonerqAUl0F0V7lxJ931U1fyN6NbZE4u1LhyaHfIiyGN2xZBzNajmkWyHWDDUzYH_c'
-            setToken(access_token)
-            setloggedIn(true)
-            
-            const makeRequests = async() => {
-              const requestUserInfo = reqWithToken('https://api.spotify.com/v1/me', access_token, cancelSource) 
-              const requestPlayList = reqWithToken(`https://api.spotify.com/v1/me/playlists`, access_token, cancelSource)
-    
-              try{
-                const [_userInfo, _playlists] = await Promise.all([requestUserInfo(), requestPlayList()])
-                setuserInfo(_userInfo.data)
-                setPlaylists(_playlists.data.items)
+        // Axios(`${process.env.REACT_APP_BACK_URI}/refresh_token`, {withCredentials: true})
+        //   .then((response) => {
+          const access_token = 'BQAYnCHmJEGUV0Hk246K2HOB7rbw9O2WiqeSOVMEXN1zQuq3VEfjP2eRlUdPatc6pjGxqGyfa3yWWV61epsK_mew_9PO4sSrOax716r6i940BNayyillG9RZAQAIsHevDyGPpSlcX-BbJzTRNf3bTFUUTIpS33CVMZgnBgPbcYEtSYfXwvL0sm62YiYUpg1fXe8BpYOUATpdTWqkD5Hg1WDy45ezF4pmLpOGbfWBowElZ0s3sHFomLXh7tiGAHG0evXJ8vHULkAzzJYhSHa_urZ1NEfXJBIyxjrQmlTUFCm9pYv4FknJrD-hmztBjJvKsheonerqAUl0F0V7lxJ931U1fyN6NbZE4u1LhyaHfIiyGN2xZBzNajmkWyHWDDUzYH_c'
+          setToken(access_token)
+          setloggedIn(true)
+          
+          const makeRequests = async() => {
+            const requestUserInfo = reqWithToken('https://api.spotify.com/v1/me', access_token, cancelSource) 
+            const requestPlayList = reqWithToken(`https://api.spotify.com/v1/me/playlists`, access_token, cancelSource)
+  
+            try{
+              const [_userInfo, _playlists] = await Promise.all([requestUserInfo(), requestPlayList()])
+              setuserInfo(_userInfo.data)
+              setPlaylists(_playlists.data.items)
 
-              }catch(error){
-                console.log(error)
-              }
+            }catch(error){
+              console.log(error)
             }
-            
-            makeRequests()
-            setLoading(false)
-          })
-          .catch((error) => {
-            console.log(error)
-            setLoading(false)
-            return
-          })
+          }
+          
+          makeRequests()
+          setLoading(false)
+        )
+        .catch((error) => {
+          console.log(error)
+          setLoading(false)
+          return
+        })
       }
     }
     return (()=> {
