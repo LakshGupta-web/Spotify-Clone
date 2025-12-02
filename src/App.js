@@ -87,12 +87,12 @@ function App() {
           
           makeRequests()
           setLoading(false)
-        )
-        .catch((error) => {
-          console.log(error)
-          setLoading(false)
-          return
-        })
+          // })
+          // .catch((error) => {
+          //   console.log(error)
+          //   setLoading(false)
+          //   return
+          // })
       }
     }
     return (()=> {
