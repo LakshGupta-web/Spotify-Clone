@@ -9,7 +9,7 @@ export default function BrowsePage() {
     const [genre, setGenre] = useState([])
 
     useEffect(() => {
-        const [source, makeRequest] = makeAxiosRequest('https://api.spotify.com/v1/browse/categories?limit=50')
+        const [source, makeRequest] = makeAxiosRequest('https://api.spotify.com/v1/browse/categories?limit=5')
 
         makeRequest()
             .then((data) => {
